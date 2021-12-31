@@ -1,23 +1,16 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (messages) => {
+
+    // const usersByChat = {messages.userid}.length;
+
+
     return (
         <div className="header">
-            <div className="header-title">
-                <p>New Year Chat</p>
-            </div>
-            
-            <div className="header-users-count">
-                <p>{} participants</p>
-            </div>
-                        
-            <div className="header-messages-count">
-                <p>{} massage</p>
-            </div>
-                        
-            <div className="header-last-message-date">
-                <p>last massage at {}</p>
-            </div>
+            <h3 className="header-title">New Year</h3>
+            <h3 className="header-users-count">{} participants</h3> 
+            <h3 className="header-messages-count">{} massage</h3>
+            <h3 className="header-last-message-date">last massage at {}</h3>
         </div>
     );
 };
