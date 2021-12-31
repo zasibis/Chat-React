@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const MessageInput = ({addMessage}) => {
+    const [input, setInput] = useState('');
     return (
         <div className="message-input">
-            <input type="text" class="message-input-text" placeholder="new message" value=""></input>
-            <button onClick={() => addMessage()} className="message-input-button">Send</button>
+            <input type="text" className="message-input-text" placeholder="new message" value={input} onInput={e => setInput(e.target.value)}></input>
+            <button onClick={() => addMessage(input)} className="message-input-button">Send</button>
         </div>
     );
 };

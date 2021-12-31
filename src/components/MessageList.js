@@ -6,9 +6,9 @@ import OwnMessage from "./OwnMessage";
 import Preloader from "./Preloader";
 
 
-const MessageList = ({messages}) => {
+const MessageList = ({messages, formatDate}) => {
     console.log(messages);
-    const formatDate = (date) => {
+    const formatDateHM = (date) => {
         const dateValue = new Date(date);
         return `${dateValue.getHours()}:${dateValue.getMinutes()}`;
     }
@@ -18,19 +18,22 @@ const MessageList = ({messages}) => {
         <div className="message-list">
             {
             messages.length ? ( 
-                messages.map(({text, createdAt, avatar, user, userId}) => {
+                messages.map(({text, createdAt, avatar, user, userId, removeMessages}) => {
                     const ownMessage = userId === '533b5230-83c9-11e9-8e0c-c7eca82aa7bd';
                     return (
                         <>
                         {
-                            ownMessage ? <Message 
+                            ownMessage ? <OwnMessage 
                             text={text}
-                            time={formatDate(createdAt)} 
+                            time={formatDateHM(createdAt)}
+                            formatDate={formatDate(createdAt)}
                             avatar={avatar}
-                            userName={user} /> : (
+                            userName={user}
+                            /> : (
                                 <Message 
                                 text={text}
-                                time={formatDate(createdAt)} 
+                                time={formatDateHM(createdAt)}
+                                formatDate={formatDate(createdAt)}
                                 avatar={avatar}
                                 userName={user}
                                 />

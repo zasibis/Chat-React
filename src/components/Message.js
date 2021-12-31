@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Message = ({text, time, avatar, userName}) => {
+const Message = ({text, time, avatar, userName, formatDate}) => {
     return (
 
         <div className="massage">
@@ -10,6 +10,10 @@ const Message = ({text, time, avatar, userName}) => {
             
             <div className="message-time">
                 {time}
+            </div>
+
+            <div className="message-formatDate">
+                {formatDate}
             </div>
                         
             <div className="message-like">

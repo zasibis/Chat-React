@@ -1,25 +1,31 @@
 import React from 'react';
 
-const OwnMessage = () => {
+const OwnMessage = ({text, time, avatar, userName, editMessage, deleteMessage, formatDate}) => {
 
-    
+
     return (
         <div className="own-message">
             <div className="message-text">
+                {text}
+            </div>
+                
+            <div className="message-time">
+                {time}
+            </div>
 
+            <div className="message-formatDate">
+                {formatDate}
             </div>
             
-            <div className="message-time">
+            <img src={avatar} className="message-user-name" alt="avatar"/>
 
+            <div className="message-user-name">
+                {userName}
             </div>
-                        
-            <div className="message-edit">
+                       
+            <button onClick={() => editMessage()} className="message-edit">Edit</button>
+            <button onClick={() => deleteMessage()} className="message-delete">Delete</button>           
 
-            </div>
-                        
-            <div className="message-delete">
-
-            </div>
         </div>
     );
 };

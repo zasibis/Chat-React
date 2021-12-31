@@ -3,7 +3,6 @@ import "../App.css";
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import MessageList from "./MessageList";
-import Preloader from "./Preloader";
 import MessageInput from "./MessageInput";
 
 const Chat = () => {
@@ -18,16 +17,10 @@ const Chat = () => {
             text
          }]);
     }
-
     const ownMassage = {
-        
-            "id": "80f08600-1b8f-11e8-9629-c7eca82aa7bd",
             "userId": "533b5230-83c9-11e9-8e0c-c7eca82aa7bd",
             "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNRY166AtT_-QcOf08NEASmYlXwZO7eg9OZA&usqp=CAU",
-            "user": "Dima Santarskyi",
-            "text": "Всем привет, мутим что-то на НГ тугезер?",
-            "createdAt": "2021-12-23T12:33:21.745Z",
-            "editedAt": ""
+            "user": "Dima Santarskyi"
     };
 
     const [messages, setMessages] = useState([]);
@@ -39,11 +32,58 @@ const Chat = () => {
         .then(data => setMessages(data))
       },[])
 
+    const usersCount = () => {
+        const usersId = messages.map(message => message.userId)
+        return new Set(usersId).size
+    }
+
+    const latestMessages = messages.reduce((a, b) => {
+        return new Date(a.createdAt) > new Date(b.createdAt) ? a : b;
+      }, [])
+
+    const date = latestMessages.createdAt ? new Date(latestMessages.createdAt) : '';
+    const dateStr = date ?
+        ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+        ("00" + date.getDate()).slice(-2) + "/" +
+        date.getFullYear() + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) + ":" +
+        ("00" + date.getSeconds()).slice(-2) :  ''
+
+        var fulldays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        
+        
+        function formatDate(someDateTimeStamp) {
+            const dt = new Date(someDateTimeStamp),
+                date = dt.getDate(),
+                month = months[dt.getMonth()],
+                timeDiff = someDateTimeStamp - Date.now(),
+                diffDays = new Date().getDate() - date,
+                diffMonths = new Date().getMonth() - dt.getMonth(),
+                diffYears = new Date().getFullYear() - dt.getFullYear();
+        
+            if(diffYears === 0 && diffDays === 0 && diffMonths === 0){
+              return "Today";
+            }else if(diffYears === 0 && diffDays === 1) {
+              return "Yesterday";
+            }else if(diffYears === 0 && diffDays === -1) {
+              return "Tomorrow";
+            }else if(diffYears === 0 && (diffDays < -1 && diffDays > -7)) {
+              return fulldays[dt.getDay()];
+            }else if(diffYears >= 1){
+              return month + " " + date + ", " + new Date(someDateTimeStamp).getFullYear();
+              }else {
+                return fulldays[dt.getDay()] + ", " + month + " " + date;
+              }
+        }
+      
+
 
     return (
         <div className="chat">
-            <Header />
-            <MessageList messages={messages}/>
+            <Header  usersCount={usersCount()} messagesCount={messages.length} dateStr={dateStr}/>
+            <MessageList messages={messages} formatDate={formatDate}/>
             <MessageInput 
              addMessage={addMessage}
             />

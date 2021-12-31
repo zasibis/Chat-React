@@ -38,8 +38,13 @@
 }
 
 .header-last-message-date {
-  margin-left: 250px;
+  margin-left: 80px;
   font-family: 'Muli', sans-serif;
+}
+
+.massage {
+  padding: 30px;
+  border: 1px solid #8a8a8a;
 }
 
 .message-list {
@@ -47,6 +52,13 @@
   overflow: scroll;
   margin: 1rem auto;
   scroll-behavior: smooth;
+  text-align: left;
+}
+
+.own-message {
+  padding: 30px;
+  border: 1px solid #8a8a8a;
+  text-align: right;
 }
 
 .messages-divider {
@@ -55,6 +67,10 @@
 
 .message-input {
   display: flex;
+}
+
+.message-text {
+  border: 1px solid #d19595;
 }
 
 .message-input-text {
