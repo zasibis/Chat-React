@@ -54,15 +54,29 @@
 }
 
 .message-input {
-  
+  display: flex;
 }
 
 .message-input-text {
-
+background-color: white;
+color: black;
+border: 2px solid #8a8a8a;
+width: 1000px;
+padding: 2px;
+border-radius: 4px;
 }
 
 .message-input-button{
-
+/* background-color: white;
+color: black;
+border: 2px solid #8a8a8a;
+padding: 10px; */
+background-color: #04AA6D;
+color: white;
+padding: 12px 20px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
 }
 
 
