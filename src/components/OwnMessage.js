@@ -1,7 +1,6 @@
 import React from 'react';
 
-const OwnMessage = ({text, time, avatar, userName, editMessage, deleteMessage, formatDate}) => {
-
+const OwnMessage = ({text, time, avatar, userName, getEditedMessage, deleteMessage, formatDate}) => {
 
     return (
         <div className="own-message">
@@ -23,8 +22,8 @@ const OwnMessage = ({text, time, avatar, userName, editMessage, deleteMessage, f
                 {userName}
             </div>
                        
-            <button onClick={() => editMessage()} className="message-edit">Edit</button>
-            <button onClick={() => deleteMessage()} className="message-delete">Delete</button>           
+            <button onClick={getEditedMessage} className="message-edit">Edit</button>
+            <button onClick={deleteMessage} className="message-delete">Delete</button>           
 
         </div>
     );

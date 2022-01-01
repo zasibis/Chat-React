@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+svg {
+  cursor: pointer;
+}
+
+.message-like {
+  font-weight: 100;
+  cursor: pointer;
+  transition: 0.3s ease-in-out all;
+}
+
+.like-active {
+  font-weight: 900;
+  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg)
+    brightness(118%) contrast(119%);
+}
+
 .chat {
   margin: 0 auto;
   max-width: 800px;

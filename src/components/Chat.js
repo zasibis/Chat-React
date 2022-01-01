@@ -7,7 +7,7 @@ import MessageInput from "./MessageInput";
 
 const Chat = () => {
     const addMessage = text => {
-        const id = Math.random().toString();
+        const id = Math.floor(Math.random() * 100).toString();
         const date = new Date().toISOString();
         setMessages([...messages, { 
             ...ownMassage,
@@ -24,6 +24,7 @@ const Chat = () => {
     };
 
     const [messages, setMessages] = useState([]);
+    const [currentMessage, setCurrentMessage] = useState();
 
     useEffect(() => {
         fetch("https://zasibis.github.io/homepage/users.json")
@@ -77,15 +78,42 @@ const Chat = () => {
                 return fulldays[dt.getDay()] + ", " + month + " " + date;
               }
         }
-      
+        
 
 
+        function deleteMessage(id) {
+            const newMessages = messages.filter(message => message.id !== id)
+
+            setMessages(newMessages);
+        }
+
+        function getEditedMessage(id) {
+            const currentMessage = messages.filter(message => message.id === id)[0]
+            setCurrentMessage(currentMessage)
+        }
+
+
+
+        function editMessage(id, newText) {
+            const newMessages = [...messages];
+            const index = newMessages.findIndex(message => message.id === id);
+            newMessages[index].text = newText;
+
+            setMessages(newMessages);
+            setCurrentMessage(undefined);
+        }
+
+        
+
+ 
     return (
         <div className="chat">
             <Header  usersCount={usersCount()} messagesCount={messages.length} dateStr={dateStr}/>
-            <MessageList messages={messages} formatDate={formatDate}/>
+            <MessageList messages={messages} formatDate={formatDate} deleteMessage={deleteMessage} getEditedMessage={getEditedMessage} />
             <MessageInput 
+            currentMessage={currentMessage}
              addMessage={addMessage}
+             editMessage={editMessage}
             />
 
       </div>
